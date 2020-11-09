@@ -9,10 +9,26 @@ public class Caissier extends Employe {
 
 	}
 
+    @Override
+    public String toString() {
+        return "Caissier{" + "numeroDeCaisse=" + numeroDeCaisse + '}'+" "+ super.toString();
+    }
+
         
-        @Override
-        public String toString(){
-        return "Caissier [idEmp=" + idEmp + ", nom=" + nom + ", adresseEmp=" + adresseEmp + ", nbre_heures=" + nbre_heures + ", numeroDeCaisse="
-				+ numeroDeCaisse +  "]";
+       
+
+    @Override
+    public float getSalaireEmploye() {
+float salaire = 0;
+        int nbrHeureSup = 0;
+        int nbrDeBase = 0;
+        if (nbre_heures > 180) {
+            nbrHeureSup = nbre_heures - 180;
+            nbrDeBase = 180;
+        } else {
+            nbrHeureSup = 0;
+            nbrDeBase = nbre_heures;
         }
+        salaire = (float) ((nbrDeBase * 10) + (10 * 1.15 * nbrHeureSup));
+        return salaire;    }
 }

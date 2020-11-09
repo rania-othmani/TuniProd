@@ -5,89 +5,134 @@
  */
 package tn.tuniprod.gestionmagasin;
 
-import java.util.Arrays;
-
 /**
  *
  * @author othma_darbdli
  */
 public class Magasin {
-    public int id;
-	public String adresse;
-	final int capacite = 50;
-	public Produit[] produits;
-	public int nbreProduit = 0;
-	public int nbreEmploye=0;
-	public int nbreEmpMax = 20;
-	public Employe[] employes;
-	
-	public Magasin(int id, String adresse) {
-		this.id = id;
-        this.adresse = adresse;
-     
-        this.produits = new Produit[capacite];
-        this.employes = new Employe[nbreEmpMax];
-	}
-	
 
-	public void addEmp(Employe employe) {
-		if (nbreEmploye < nbreEmpMax) {
-			employes[nbreEmploye] = employe;
-			nbreEmploye++;
-		}
-                else {
-			System.out.println("Employe existe!");
-		}
-	}
-	
-	public void add(Produit produit) {
-		// TODO Auto-generated method stub
-		if (nbreProduit < capacite && !comparer(produit)) {
-			produits[nbreProduit] = produit;
-			nbreProduit++;
-		}
-		else {
-			System.out.println("Ce produit existe!");
-		}
-	}
-	
-	public boolean comparer(Produit produit) {
-		for(int i = 0 ; i<nbreProduit ; i++ ) 
-			if(produits[i].getId() == produit.getId() && produits[i].getLibelle().equals(produit.getLibelle()) && produits[i].getPrix() == produit.getPrix()) {
-				return true;
-			}
-		return false;
-		
-	}
-	
-	public int chercher(Produit produit) {
-        for (int i = 0; i < nbreProduit; i++)
-            if(produits[i].getId() == produit.getId() && produits[i].getLibelle().equals(produit.getLibelle()) && produits[i].getPrix() == produit.getPrix()) {
-                return  i;
+    int id;
+    String adresse;
+    String nom;
+    int capacite = 50;
+    ProduitAlimentaire[] produits;
+    int nbreEmploye;
+    Employe[] employes = new Employe[20];
+
+    public Magasin(int id, String adresse) {
+        this.id = id;
+        this.adresse = adresse;
+        this.produits = new ProduitAlimentaire[2];
+    }
+
+    public Magasin(int id, String nom, String adresse) {
+        this.id = id;
+        this.adresse = adresse;
+        this.produits = new ProduitAlimentaire[50];
+        this.nom = nom;
+    }
+
+    public void addEmp(Employe employe) {
+        this.employes[nbreEmploye] = employe;
+        this.nbreEmploye++;
+    }
+
+    public void add(ProduitAlimentaire produit) throws MagasinPleinException {
+        if (this.capacite == 2) {
+            throw (new MagasinPleinException("Magasin Plein :::!!"));
+        } else if (this.chercher(produit)) {
+            System.out.println("Produit existant");
+        } else {
+            this.produits[capacite] = produit;
+            this.capacite++;
+            System.out.println("Produit Ajouté");
+        }
+    }
+ public boolean chercher(ProduitAlimentaire produit) {
+        for (int i = 0; i < this.capacite; i++) {
+            if (this.produits[i].comparer(produit)) {
+                return true;
             }
+        }
+        return false;
+    } 
+ 
+    public static boolean comparer(ProduitAlimentaire produit, ProduitAlimentaire produit2) {
+        return produit2.getIdentifiant() == produit.getIdentifiant()
+                && produit2.getPrix() == produit.getPrix()
+                && produit2.getLibelle() == produit.getLibelle();
+    }
+
+   
+
+    public int getIndex(ProduitAlimentaire produit) {
+        for (int i = 0; i < this.capacite; i++) {
+            if (this.produits[i].comparer(produit)) {
+                return i;
+            }
+        }
         return -1;
     }
-	
-	public void supprimer(Produit produit) {
-		int pos = chercher(produit);
-        if (pos != -1)
-        for (int i = pos; i < nbreProduit ; i++) {
 
-                produits[i] = produits[i + 1];
+    public void supprimer(ProduitAlimentaire produit) {
+        int pos = this.getIndex(produit);
+        if (pos == -1) {
+
+            System.out.println("impossible de supprimer un produit qui n'existe pas dans le magasin");
+        } else {
+            for (int i = pos; i < capacite; i++) {
+                this.produits[i] = this.produits[i + 1];
+                this.produits[capacite] = null;
+                this.capacite--;
+
+            }
         }
-        nbreProduit--;
-	}
-	
-	public Magasin magasinSup(Magasin M1, Magasin M2) {
-		if(M1.nbreProduit>M2.nbreProduit)
-			return M1;
-		else 
-			return M2;
-	}
-	@Override
-	public String toString() {
-		return "Magasin [id=" + id + ", adresse=" + adresse + ", capacite=" + capacite + ", produits="
-				+ Arrays.toString(produits) + ", nbreProduit=" + nbreProduit + ", employes="+Arrays.toString(employes) + "]";
-	}
-	
+    }
+
+    public Magasin magasinSup(Magasin M) {
+        if (this.capacite > M.capacite) {
+            return this;
+        } else {
+            return M;
+        }
+    }
+
+    public void afficherEmployes() {
+        for (int i = 0; i < nbreEmploye; i++) {
+            System.out.println(employes[i]);
+        }
+    }
+
+    public float calculStock() {
+        float total = 0;
+        for (int i = 0; i < this.capacite; i++) {
+            if (this.produits[i].determinerTypeProduit().equals("Fruit")) {
+                total += ((ProduitFruit) this.produits[i]).quantite;
+            }
+        }
+
+        return total;
+    }
+
+    @Override
+    public String toString() {
+        String s = "";
+        s += "NOM MAGASIN : " + this.nom + " \n";
+        s += "identifiant : " + this.id + " \n";
+        s += "adresse : " + this.adresse + " \n";
+        s += "capacite : " + this.capacite + " \n";
+
+        String prods = "";
+        for (int i = 0; i < this.capacite; i++) {
+            prods += this.produits[i];
+        }
+
+        String empl = "";
+        for (int i = 0; i < this.nbreEmploye; i++) {
+            empl += this.employes[i];
+        }
+
+        return s + prods + "\n" + empl;
+    }
+
 }

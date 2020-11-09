@@ -5,85 +5,130 @@
  */
 package tn.tuniprod.gestionmagasin;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 /**
  *
- * @author othma_darbdli
+ * @author ACER
  */
 public class TuniProdProject {
 
     /**
      * @param args the command line arguments
-     * @throws java.text.ParseException
      */
-    public static void main(String[] args) throws ParseException {
-                Produit produit = new Produit();
-		Produit produit1 = new Produit(1021,"LAit","Delice",0.700);
-		Produit produit2 = new Produit(2510,"Yaourt","Vitalait", 0.500);
-		Produit produit3 = new Produit(3250,"Tomate","Sicam",1.200);
-		
-		System.out.println(produit);
-		System.out.println(produit1);
-		System.out.println(produit2);
-		System.out.println(produit3);
-		System.out.println("-------------------------------------------------------");
+    public static void main(String[] args) {
 
-		
-             SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+//        ProduitAliementaire produit1 = new ProduitAliementaire();
+//        ProduitAliementaire produit2 = new ProduitAliementaire(1021, "Lait", "Delice");
+//        ProduitAliementaire produit3 = new ProduitAliementaire(2510, "yaourt", "Vitalait");
+//        ProduitAliementaire produit4 = new ProduitAliementaire(3250, "Tomate", "Sicam", 1.200f);
+//        ProduitAliementaire produit44 = new ProduitAliementaire(3250, "Tomate", "Sicam", 1.200f);
 
-		produit1.setDateExp(formatter.parse("10/25/2021"));
-		produit2.setDateExp(formatter.parse("11/29/2021"));
-		produit3.setDateExp(formatter.parse("09/25/2021"));
-		System.out.println( produit1 + "\n" + produit2 + "\n" +produit3);
+//        produit2.afficher();
+//        
+//        produit2.affecterPrix(0.7f);
+//        
+//        produit2.afficher();
+//        
+//        System.out.println( produit2.toString());
+//        System.out.println(produit2);
+//        
+//        produit2.affecterDateExpiration(new Date(1377249026));
+//        System.out.println(produit2.dateExpriration.toString());
 
-		
-		System.out.println("-------------------------------------------------------");
+//---------------------------------------
+        Magasin m1 = new Magasin(12345, "El Aouina");
+//        System.out.println(m1);
 
-		Magasin magasin1 = new Magasin(1,"Tunis");
-		magasin1.add(produit1);
-		System.out.println(magasin1);
-		System.out.println("Le nombre totale des produits est egale à " +magasin1.nbreProduit);
-		System.out.println("-------------------------------------------------------");
-                
-                
-                
-		Caissier caissier1 = new Caissier(1, "rania", "tunis", 20,3);
-		Caissier caissier2 = new Caissier(2, "rim", "ariana", 28,2);
-                Vendeur vendeur = new Vendeur(3, "ahmed", "elkef", 40,50);
-		Responsable resp = new Responsable(4, "bilel", "tunis", 40,100);
-		Magasin carrefour = new Magasin(1,"Centre-Ville");
-		Magasin monoprix = new Magasin(2,"Menzah 6");
-                carrefour.add(produit1);
-                carrefour.add(produit2);                  
-                carrefour.add(produit3);
-                monoprix.add(produit1);
-                monoprix.add(produit2);                  
-                monoprix.add(produit3);
-                
-                carrefour.addEmp(caissier1);
-                carrefour.addEmp(caissier2);
-                carrefour.addEmp(vendeur);
-                carrefour.addEmp(resp);
-                System.out.println(carrefour);
-		
-                
+//        m1.ajouterProduit(produit1);
+//        m1.ajouterProduit(produit2);
+//        m1.ajouterProduit(produit3);
+//        m1.ajouterProduit(produit4);
+        // m1.ajouterProduit(produit44);
+//        System.out.println(m1);
+//        
+//        System.out.println("Total des Produits  " + m1.getTotalProduits() );
+//---------------------------------------
+//        System.out.println(produit44.comparer(produit4));
+//        
+//        System.out.println(Magasin.comparer(produit4,produit2));
+//        
+//        m1.supprimerProduit(new ProduitAliementaire(98798, "qsd", "qsd"));
+//        System.out.println(m1);
+//
+//        //---------------------------
+        Magasin carrefour = new Magasin(1, "Carrefour", "Centre-ville");
+        Magasin monoprix = new Magasin(2, "Monoprix", "Menzah6");
 
-		Caissier caissier3 = new Caissier(1, "amjed", "megrine", 20,1);
-		Vendeur vendeur1 = new Vendeur(2, "amal", "sousse", 40,10);
-		Vendeur vendeur2 = new Vendeur(3, "ines", "gabes", 28,40);
-		Vendeur vendeur3 = new Vendeur(4, "houyem", "tunis", 40,20);
-		Responsable resp1 = new Responsable(5,"yosr", "tunis", 40, 200);
-		monoprix.addEmp(caissier3);
-		monoprix.addEmp(vendeur1);
-		monoprix.addEmp(vendeur2);
-		monoprix.addEmp(vendeur3);
-		monoprix.addEmp(resp1);
-                System.out.println(monoprix);
-             
+//        Caissier caissierC1 = new Caissier(5, 123456, "Ariana", "Mahamed", 36);
+//        Caissier caissierC2 = new Caissier(2, 894679, "Tunis", "Ali", 40);
+//        Vendeur vendeurC1 = new Vendeur(10, 849895, "Charguia", "Nihel", 50);
+//        Responsable responsableC1 = new Responsable(500, 6889566, "Raoued", "taheni", 52);
+//
+//        Caissier caissierM1 = new Caissier(9, 48912, "Tunis", "Kais", 42);
+//        Vendeur vendeurM1 = new Vendeur(15, 9485632, "Bizerte", "Abdou", 15);
+//        Responsable responsableM1 = new Responsable(1500, 9821421, "Ghazela", "Mouhaned", 170);
+//        System.out.println("SALAIRE :" + responsableM1.getSalaireEmploye());
+//        monoprix.ajouterEmploye(caissierC1);
+//        monoprix.ajouterEmploye(caissierC2);
+//        monoprix.ajouterEmploye(vendeurC1);
+//        monoprix.ajouterEmploye(responsableC1);
+//
+//        carrefour.ajouterEmploye(caissierM1);
+//        carrefour.ajouterEmploye(vendeurM1);
+//        carrefour.ajouterEmploye(responsableM1);
+//        System.out.println("-------------");
+//        monoprix.afficherEmployes();
+//        System.out.println("-------------");
+//        carrefour.afficherEmployes();
+//        monoprix.ajouterProduit(produit2);
+//        monoprix.ajouterProduit(produit3);
+//        carrefour.ajouterProduit(produit3);
+//        carrefour.ajouterProduit(produit4);
+//        System.out.println("-------------");
+//        System.out.println(monoprix);
+//        System.out.println("-------------");
+//        System.out.println(carrefour);
+        ProduitFruit prod1 = null;
+        try {
+            prod1 = new ProduitFruit(12.3f, "mars", 1254, "Fraise", "", 10);
+        } catch (PrixNegatifException ex) {
 
+        }
+        ProduitFruit prod2 = null;
+        try {
+            prod2 = new ProduitFruit(50f, "juin", 1224, "Pastèque", "", 0);
+        } catch (PrixNegatifException ex) {
+            System.out.println("");
+        }
+        ProduitFruit prod3 = null;
+        try {
+            prod3 = new ProduitFruit(25.6f, "décembre", 7896, "Mandarine", "", 0);
+        } catch (PrixNegatifException ex) {
+
+        }
+
+        ProduitLegume prod4 = null;
+
+        try {
+            prod4 = new ProduitLegume(14f, "janvier", 8521, "Artichauts", "", 0);
+        } catch (PrixNegatifException ex) {
+
+        }
+
+        try {
+            carrefour.add(prod1);
+            carrefour.add(prod2);
+            carrefour.add(prod3);
+            carrefour.add(prod4);
+        } catch (MagasinPleinException ex) {
+            System.out.println("une exception  a été levé");
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        System.out.println("LE PRODUIT EST FRAIS : " + prod4.estFrais("février"));
+
+        System.out.println("LE TOTAL DES FRUITS :" + carrefour.calculStock());
 
     }
-    
+
 }
